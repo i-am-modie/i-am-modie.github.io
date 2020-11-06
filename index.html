@@ -8,7 +8,7 @@
 <body>
     
 </body>
-<script>const data = await fetch(
+<script>await (async ()=>const data = await fetch(
     "https://data.covid19info.live/processeddata.js"
 ).then((data) => data.json());
 
@@ -26,5 +26,5 @@ else{
 
 
 const result = Math.round(last7Days.reduce((acc,it)=>acc+it,0)/7/37_734_000*100000)
-document.write(`ostatnie 7 dni ${result}`);</script>
+document.write(`ostatnie 7 dni ${result}`);)()</script>
 </html>
