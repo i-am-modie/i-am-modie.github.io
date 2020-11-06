@@ -7,7 +7,7 @@
     </head>
     <body></body>
     <script>
-        (()=>{
+        (async ()=>{
         const data = await fetch(
             "https://data.covid19info.live/processeddata.js"
         ).then((data) => data.json());
