@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jak bardzo w dupie?</title>
-</head>
-<body>
-    
-</body>
-<script>(async ()=>{const data = await fetch(
-    "https://data.covid19info.live/processeddata.js"
-).then((data) => data.json());
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Jak bardzo w dupie?</title>
+    </head>
+    <body></body>
+    <script>
+        const data = await fetch(
+            "https://data.covid19info.live/processeddata.js"
+        ).then((data) => data.json());
 
-const last7Days = data.regions.find(it=>{
-return it[0].en_name === "Poland"})[7].slice(-8).map(it=>it.c).reverse().reduce((acc, it)=>{
-if(acc[0]===0){
-    return [it, []]
-}
-else{
-    return [
-        it, [...acc[1], acc[0]-it ]
-    ]
-}
-},[0, []])[1]
+        const last7Days = data.regions
+            .find((it) => {
+                return it[0].en_name === "Poland";
+            })[7]
+            .slice(-8)
+            .map((it) => it.c)
+            .reverse()
+            .reduce(
+                (acc, it) => {
+                    if (acc[0] === 0) {
+                        return [it, []];
+                    } else {
+                        return [it, [...acc[1], acc[0] - it]];
+                    }
+                },
+                [0, []]
+            )[1];
 
-
-const result = Math.round(last7Days.reduce((acc,it)=>acc+it,0)/7/37_734_000*100000)
-document.write(`ostatnie 7 dni ${result}`)})()</script>
+        const result = Math.round(
+            (last7Days.reduce((acc, it) => acc + it, 0) / 7 / 37_734_000) *
+                100000
+        );
+        document.write(`ostatnie 7 dni ${result}`);
+    </script>
 </html>
